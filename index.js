@@ -15,6 +15,13 @@ let buildingArray = [
     img: "./images/Painter.jpg",
     count: 0,
   },
+  {
+    name: "Store",
+    price: 500,
+    mps: 5,
+    img: "./images/Store.jpg",
+    count: 0,
+  },
 ]
 let boughtUpgrades = []
 let moneyPerSecondObject = {}
@@ -27,11 +34,6 @@ const body = document.querySelector("body")
 let clickingPower = 1
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms))
-}
-async function failedPurchase(el) {
-  el.style.color = "red"
-  await sleep(100)
-  el.style.color = ""
 }
 function moneyIncrese(moneyIncrese) {
   money += moneyIncrese
@@ -60,6 +62,15 @@ for (let b in buildingArray) {
   buildingInfo.append(buildingName, buildingPrice, mps)
   building.append(image, buildingInfo, buildingCount)
   shopBuildings.append(building)
+  setInterval(function () {
+    if (money < buildingArray[b].price) {
+      building.style.opacity = "0.5"
+      building.style.pointerEvents = "none"
+    } else {
+      building.style.opacity = "1"
+      building.style.pointerEvents = "auto"
+    }
+  }, 100)
   building.addEventListener("click", (event) => {
     if (money >= buildingArray[b].price) {
       money -= buildingArray[b].price
@@ -72,8 +83,6 @@ for (let b in buildingArray) {
         buildingArray[b].count,
         buildingArray[b].mps,
       ]
-    } else {
-      failedPurchase(building)
     }
   })
 }

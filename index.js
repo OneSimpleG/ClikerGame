@@ -1,37 +1,21 @@
-let money = 0
-let maxReachedMoney = 0
-let buildingArray = [
-  {
-    name: "Lemonade Stand",
-    price: 10,
-    mps: 0.1,
-    img: "./images/Lemonade Stand.jpg",
-    count: 0,
-  },
-  {
-    name: "Painter",
-    price: 100,
-    mps: 1,
-    img: "./images/Painter.jpg",
-    count: 0,
-  },
-  {
-    name: "Store",
-    price: 500,
-    mps: 5,
-    img: "./images/Store.jpg",
-    count: 0,
-  },
-]
-let boughtUpgrades = []
-let moneyPerSecondObject = {}
+import { buildings } from "./buildings.js"
 const clicker = document.querySelector(".Dollar")
 const counter = document.getElementById("Counter")
 const shopBuildings = document.getElementById("ShopBuildings")
 const mpsDisplay = document.getElementById("MPS")
 const title = document.getElementById("Title")
 const body = document.querySelector("body")
+let buildingsFromLS = JSON.parse(localStorage.getItem("GameInfo"))[1]
+let buildingArray =
+  buildingsFromLS.length < buildings.length ? buildings : buildingsFromLS
+let money = JSON.parse(localStorage.getItem("GameInfo"))[0]
+let boughtUpgrades = []
+let moneyPerSecondObject = {}
 let clickingPower = 1
+body.style.display = "none"
+setTimeout(function () {
+  body.style.display = "flex"
+}, 10)
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
@@ -62,7 +46,18 @@ for (let b in buildingArray) {
   buildingInfo.append(buildingName, buildingPrice, mps)
   building.append(image, buildingInfo, buildingCount)
   shopBuildings.append(building)
+  moneyPerSecondObject[buildingArray[b].name] = [
+    buildingArray[b].count,
+    buildingArray[b].mps,
+  ]
   setInterval(function () {
+    if (b > 0 && buildingArray[b - 1].count > 0) {
+      building.style.display = "flex"
+    } else if (b == 0) {
+      building.style.display = "flex"
+    } else {
+      building.style.display = "none"
+    }
     if (money < buildingArray[b].price) {
       building.style.opacity = "0.5"
       building.style.pointerEvents = "none"
@@ -108,10 +103,9 @@ setInterval(function () {
   Math.floor((money += moneyPerSecond) * 10) / 10
   counter.innerText = `Money: ${Math.floor(money)}`
   mpsDisplay.innerText = `MPS: ${Math.floor(moneyPerSecond * 10) / 10}`
-  if (money >= maxReachedMoney) {
-    maxReachedMoney = money
-  }
 }, 1000)
 setInterval(function () {
   title.innerText = `${Math.floor(money)} Money - Money Clicker`
+  let gameInfo = [Math.floor(money), buildingArray]
+  localStorage.setItem("GameInfo", JSON.stringify(gameInfo))
 }, 5000)

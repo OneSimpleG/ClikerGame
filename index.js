@@ -5,10 +5,17 @@ const shopBuildings = document.getElementById("ShopBuildings")
 const mpsDisplay = document.getElementById("MPS")
 const title = document.getElementById("Title")
 const body = document.querySelector("body")
-let buildingsFromLS = JSON.parse(localStorage.getItem("GameInfo"))[1]
+let buildingsFromLS =
+  JSON.parse(localStorage.getItem("GameInfo")) != null
+    ? JSON.parse(localStorage.getItem("GameInfo"))[1]
+    : buildings
+// let buildingsFromLS = JSON.parse(localStorage.getItem("GameInfo"))[1]
 let buildingArray =
   buildingsFromLS.length < buildings.length ? buildings : buildingsFromLS
-let money = JSON.parse(localStorage.getItem("GameInfo"))[0]
+let money =
+  JSON.parse(localStorage.getItem("GameInfo")) != null
+    ? JSON.parse(localStorage.getItem("GameInfo"))[0]
+    : 0
 let boughtUpgrades = []
 let moneyPerSecondObject = {}
 let clickingPower = 1

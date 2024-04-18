@@ -1,0 +1,172 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Lemonmilk";
+  user-select: none;
+  /* z-index: 1; */
+}
+@font-face {
+  font-family: "Lemonmilk"; /*a name to be used later*/
+  src: url("./fonts/LEMONMILK-Regular.otf"); /*URL to font*/
+}
+body {
+  display: flex;
+  /* overflow: hidden; */
+  /* width: 99.9vw; */
+  /* height: 100%; */
+}
+body > div {
+  height: 100vh;
+  width: 33.33%;
+  /* border: 1px solid black; */
+  /* margin: 1px; */
+}
+.MoneyClicker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url(./images/ClikerBackground.jpg);
+  background-size: 400px;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.75) inset;
+  width: 35%;
+  /* z-index: -1; */
+}
+#Counter {
+  font-weight: bold;
+  margin-top: 100px;
+  font-size: 4vw;
+  color: green;
+  text-shadow: 2px 2px 2px rgb(0, 0, 0);
+}
+#MPS {
+  margin-bottom: 180px;
+  font-size: 2vw;
+  color: white;
+}
+.Pillar {
+  border: solid rgb(65, 29, 5);
+  border-width: 0 1px;
+  width: 20px;
+  /* height: 150vh; */
+  background-image: url(./images/PillarMiddle.png);
+  background-position: center;
+  background-size: 20px 110%;
+  background-repeat: repeat;
+}
+.BuildingDisplay {
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.75) inset;
+}
+.Shop {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+.ShopUpgrade {
+  height: 10vh;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75) inset;
+
+  /* border: 1px solid black; */
+}
+.ShopUpgrade:hover {
+  height: 25vh;
+}
+#ShopBuildings {
+  height: 100%;
+  /* box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.75) inset; */
+  /* border: 1px solid black; */
+}
+.Dollar {
+  cursor: pointer;
+  width: 90%;
+  height: 13vw;
+  box-shadow: 7px 7px 5px rgba(0, 0, 0, 0.5);
+  /* z-index: 1; */
+}
+.Dollar:hover {
+  scale: 1.03;
+}
+.Dollar:active {
+  scale: 0.95;
+}
+.building {
+  border: 1px solid black;
+  /* width: 100%; */
+  display: flex;
+  cursor: pointer;
+}
+#GlowEffect {
+  position: absolute;
+  background-image: url(./images/GlowEffect.png);
+  background-size: cover;
+  /* background-color: gray; */
+  top: 25.5vh;
+  height: 500px;
+  width: 500px;
+  z-index: 0;
+  animation: glowSpin 10s linear;
+  animation-iteration-count: infinite;
+  opacity: 0.35;
+  pointer-events: none;
+  /* border: 1px solid black; */
+}
+.building > img {
+  height: 100px;
+  width: 100px;
+}
+.BuildingInfo {
+  width: 100%;
+  /* border: 1px solid black; */
+}
+.BuildingInfoName {
+  width: 100%;
+  text-align: center;
+  /* margin: 10px 0 10px 0; */
+  font-size: 20px;
+}
+.BuildingCount {
+  width: 120px;
+  text-align: center;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 70px;
+  color: rgba(0, 0, 0, 0.75);
+}
+.FloatingNumber {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  color: white;
+  font-size: 20px;
+  /* background-color: red; */
+  /* transform-origin: bottom; */
+}
+.FloatingNumber::before {
+  content: attr(data-befor);
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  animation: animation 1s linear;
+}
+.FloatingNumber::after {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+@keyframes animation {
+  0% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+}
+@keyframes glowSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

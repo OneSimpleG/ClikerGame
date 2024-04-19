@@ -115,4 +115,4 @@ setInterval(function () {
   title.innerText = `${Math.floor(money)} Money - Money Clicker`
   let gameInfo = [Math.floor(money), buildingArray]
   localStorage.setItem("GameInfo", JSON.stringify(gameInfo))
-}, 5000)
+}, 3000)
